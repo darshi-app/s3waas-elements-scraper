@@ -36,41 +36,41 @@ The output [scraped_content.json](file:///e:/darshi/s3waas-elements-scraper/scra
 3.  Check [scraped_content.json](file:///e:/darshi/s3waas-elements-scraper/scraped_content.json) for the results.
 
 
+## Infrastructure Analysis
+
 We have successfully analyzed and scraped the homepages of the provided 25 S3WaaS government websites. The scraper verified that these sites share a common infrastructure with unique identifiers (hashes) for their CDN storage.
 
-> [!IMPORTANT]Key Findings
-Infrastructure: Sites are WordPress-based.
-Storage: Assets are hosted on cdn.s3waas.gov.in.
-Pattern: https://cdn.s3waas.gov.in/s3<SITE_HASH>/uploads/...
-Identified Site Hashes
+### Key Findings
+- **Infrastructure**: Sites are built on a customized WordPress-based framework.
+- **Storage**: Most assets are hosted centrally on `cdn.s3waas.gov.in`.
+- **URL Pattern**: `https://cdn.s3waas.gov.in/s3<SITE_HASH>/uploads/...`
+
+### Identified Site Hashes
 The following unique hashes were extracted. These are the keys to accessing the backend storage for each district directly.
 
-District	Site URL	CDN Hash
-Chennai	https://chennai.nic.in	13f3cf8c531952d72e5847c4183e6910
-Mumbai	https://mumbaicity.gov.in	11b921ef080f7736089c757404650e40
-Mumbai Suburban	https://mumbaisuburban.gov.in/en/	04025959b191f8f9de3f924f0940515f
-Ranchi	https://ranchi.nic.in	2b8a61594b1f4c4db0902a8a395ced93
-Ranga Reddy	https://rangareddy.telangana.gov.in	addfa9b7e234254d26e9c7f2af1005cb
-Hooghly	https://hooghly.nic.in	aff1621254f7c1be92f64550478c56e6
-Howrah	https://howrah.gov.in	53e3a7161e428b65688f14b84d61c610
-Hyderabad	https://hyderabad.telangana.gov.in	6c524f9d5d7027454a783c841250ba71
-Imphal East	https://imphaleast.nic.in	a684eceee76fc522773286a895bc8436
-Imphal West	https://imphalwest.nic.in	faa9afea49ef2ff029a833cccc778fd0
-...	...	...
-(Full list available in 
-[scraped_assets.json](file:///e:/darshi/s3waas-elements-scraper/scraped_assets.json)
-)
+| District | Site URL | CDN Hash |
+| :--- | :--- | :--- |
+| **Chennai** | [Link](https://chennai.nic.in) | `13f3cf8c531952d72e5847c4183e6910` |
+| **Mumbai** | [Link](https://mumbaicity.gov.in) | `11b921ef080f7736089c757404650e40` |
+| **Mumbai Suburban** | [Link](https://mumbaisuburban.gov.in/en/) | `04025959b191f8f9de3f924f0940515f` |
+| **Ranchi** | [Link](https://ranchi.nic.in) | `2b8a61594b1f4c4db0902a8a395ced93` |
+| **Ranga Reddy** | [Link](https://rangareddy.telangana.gov.in) | `addfa9b7e234254d26e9c7f2af1005cb` |
+| **Hooghly** | [Link](https://hooghly.nic.in) | `aff1621254f7c1be92f64550478c56e6` |
+| **Howrah** | [Link](https://howrah.gov.in) | `53e3a7161e428b65688f14b84d61c610` |
+| **Hyderabad** | [Link](https://hyderabad.telangana.gov.in) | `6c524f9d5d7027454a783c841250ba71` |
+| **Imphal East** | [Link](https://imphaleast.nic.in) | `a684eceee76fc522773286a895bc8436` |
+| **Imphal West** | [Link](https://imphalwest.nic.in) | `faa9afea49ef2ff029a833cccc778fd0` |
 
-Extracted Assets
-The scraper produced a structured JSON file 
-[scraped_assets.json](file:///e:/darshi/s3waas-elements-scraper/scraped_assets.json)
- containing:
+> [!NOTE]
+> The full list of hashes for all 25 districts is available in [scraped_assets.json](file:///e:/darshi/s3waas-elements-scraper/scraped_assets.json).
 
-Images: All image source URLs found on the homepage.
-Documents: Direct links to PDFs, DOCs, and ZIPs.
-Theme Assets: CSS/JS files used by the site theme.
-Next Steps
+### Extracted Assets
+The scraper produced a structured report in [scraped_assets.json](file:///e:/darshi/s3waas-elements-scraper/scraped_assets.json) containing:
+- **Images**: All visual media source URLs found on the homepages.
+- **Documents**: Direct links to PDF, DOC, and ZIP files.
+- **Theme Assets**: Core CSS and JavaScript dependencies used by the district themes.
+
+### Next Steps
 Now that we have the Site Hash for each district, we can:
-
-Deep Crawl: Use the hash to verify if an asset belongs to a specific district.
-API Scrape: Use admin-ajax.php (as discovered in the network check) to fetch "Announcements" and "Notices" dynamically.
+1. **Deep Crawl**: Use the hash to verify if an asset belongs to a specific district.
+2. **API Scrape**: Utilize `admin-ajax.php` (as discovered in the network check) to fetch notices and announcements dynamically.
